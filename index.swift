@@ -21,27 +21,46 @@ your text: "BORN IN 2015!", shift 1
 */
 
 func playPass(_ s: String, _ n: Int) -> String {
-    var result : String = ""
-  // your code
-    let alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    let arrayOfLetters = s.split(separator: "")
-    print(arrayOfLetters)
-    for letter in arrayOfLetters{
-        
-        if alphabet.contains("\(letter)"){
-            guard let index = Int("\(String(describing: alphabet.firstIndex(of: "\(letter)")))") else { return "O" }
-            let newLetter = "\(arrayOfLetters[index + 1])"
-            let number = Int("\(String(describing: arrayOfLetters.firstIndex(of: "\(letter)")))") ?? 0
-            if number % 2 == 0 {
-                result = "\(result)\(newLetter)"
-            } else {
-                result = "\(result)\(newLetter.uppercased())"
-            }
+  
+  let str = "abcdefghijklmnopqrstuvwxyz"
+    let dict: [Character : Character] = ["0" : "9", "1" : "8", "2" : "7", "3" : "6", "4" : "5", "5" : "4", "6" : "3", "7" : "2", "8" : "1", "9" : "0" ]
+    let characterArray = Array(str.uppercased())
+    
+    
+    let newArr = s.map { (char) -> String.Element in
+        var idx = 0
+        var present = false
+        if let id = characterArray.firstIndex(of: char) {
+            idx = id + n
+            present = true
         }
+        
+        if idx >= 26 {
+            idx = idx - 26
+        }
+        
+        var cahr = present ? characterArray[idx] : char
+        
+        if let numChar = dict[char] {
+            cahr = numChar
+        }
+        
+        return cahr
     }
-    print(result)
-    return "Hello"
+    
+    var result = ""
+    
+    for (idx, obj) in newArr.enumerated() {
+        result = idx%2 == 0 ? result + obj.uppercased() : result + obj.lowercased()
+    }
+    
+    return String(result.reversed())
 }
+
+playPass("I LOVE YOU!!!", 1);
+playPass("I LOVE YOU!!!", 0);
+playPass("AAABBCCY", 1);
+playPass("MY GRANMA CAME FROM NY ON THE 23RD OF APRIL 2015", 2);
 
 playPass("I LOVE YOU!!!", 1);
 playPass("I LOVE YOU!!!", 0);
