@@ -21,5 +21,24 @@ your text: "BORN IN 2015!", shift 1
 */
 
 function playPass(string, number){
-    
+    let result = ""
+    let alphabetic = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    let arrayOfLetter = string.split("")
+    for(let i = 0; i <= arrayOfLetter.length; i++){
+        if(alphabetic.includes(arrayOfLetter[i])){
+            let index = alphabetic.indexOf(arrayOfLetter[i])
+            let letter = alphabetic[index + number]
+            if(i % 2 === 0){
+                result += letter
+            }
+        }else {
+            result += arrayOfLetter[i]
+        }
+    }
+    console.log(result)
 }
+
+playPass("I LOVE YOU!!!", 1);
+playPass("I LOVE YOU!!!", 0);
+playPass("AAABBCCY", 1);
+playPass("MY GRANMA CAME FROM NY ON THE 23RD OF APRIL 2015", 2);
