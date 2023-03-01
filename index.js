@@ -22,20 +22,27 @@ your text: "BORN IN 2015!", shift 1
 
 function playPass(string, number){
     let result = ""
-    let alphabetic = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    let alphabetic = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     let arrayOfLetter = string.split("")
     for(let i = 0; i <= arrayOfLetter.length; i++){
         if(alphabetic.includes(arrayOfLetter[i])){
             let index = alphabetic.indexOf(arrayOfLetter[i])
-            let letter = alphabetic[index + number]
+            let num = index + number
+            while(num > alphabetic.length - 1){
+                num -= alphabetic.length - 1
+            }
+            let letter = alphabetic[num]
             if(i % 2 === 0){
                 result += letter
+            }else {
+                result += alphabetic[num]
             }
         }else {
             result += arrayOfLetter[i]
         }
     }
     console.log(result)
+    console.log(arrayOfLetter)
 }
 
 playPass("I LOVE YOU!!!", 1);
